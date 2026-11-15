@@ -1,0 +1,21 @@
+run 0 seed 1000: PASS confirmed=49 orders=200 retried=196 26s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 1 seed 1001: PASS confirmed=50 orders=200 retried=200 24s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 2 seed 1002: PASS confirmed=45 orders=200 retried=4 24s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 3 seed 1003: PASS confirmed=48 orders=200 retried=196 24s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 4 seed 1004: PASS confirmed=47 orders=200 retried=78 23s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 5 seed 1005: PASS confirmed=50 orders=200 retried=59 23s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 6 seed 1006: PASS confirmed=47 orders=200 retried=200 24s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 7 seed 1007: PASS confirmed=48 orders=200 retried=0 23s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 8 seed 1008: PASS confirmed=49 orders=200 retried=38 23s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 9 seed 1009: PASS confirmed=49 orders=200 retried=180 25s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 10 seed 1010: PASS confirmed=49 orders=200 retried=74 23s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 11 seed 1011: PASS confirmed=50 orders=200 retried=199 26s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 12 seed 1012: PASS confirmed=50 orders=200 retried=200 24s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 13 seed 1013: PASS confirmed=48 orders=200 retried=141 22s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 14 seed 1014: PASS confirmed=50 orders=200 retried=164 24s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 15 seed 1015: PASS confirmed=47 orders=200 retried=200 25s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 16 seed 1016: PASS confirmed=48 orders=200 retried=200 26s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 17 seed 1017: PASS confirmed=50 orders=200 retried=182 24s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 18 seed 1018: PASS confirmed=50 orders=200 retried=29 23s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+run 19 seed 1019: PASS confirmed=47 orders=200 retried=200 25s A1=ok A2=ok A3=ok A4=ok A5=ok A6=ok
+wrote proof/chaos-20261115T204411Z.json

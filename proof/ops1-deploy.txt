@@ -1,0 +1,55 @@
+# ops-1 deployment, 2026-11-15T20:06:39Z
+## shop-net plan on a network with nothing running (what apply starts)
+13 actions:
+  {"Start": {"cell": "shop.keys", "node": "ops-1", "replica": 0}}
+  {"Start": {"cell": "shop.catalog", "node": "ops-1", "replica": 0}}
+  {"Start": {"cell": "shop.cart", "node": "ops-1", "replica": 0}}
+  {"Start": {"cell": "shop.pay.sim", "node": "ops-1", "replica": 0}}
+  {"Start": {"cell": "shop.pay", "node": "ops-1", "replica": 0}}
+  {"Start": {"cell": "shop.inventory", "node": "sim-a", "replica": 0}}
+  {"Start": {"cell": "shop.inventory", "node": "sim-b", "replica": 1}}
+  {"Start": {"cell": "shop.inventory", "node": "sim-c", "replica": 2}}
+  {"Start": {"cell": "shop.orders", "node": "sim-a", "replica": 0}}
+  {"Start": {"cell": "shop.orders", "node": "sim-b", "replica": 1}}
+  {"Start": {"cell": "shop.orders", "node": "sim-c", "replica": 2}}
+  {"Start": {"cell": "shop.gateway", "node": "ops-1", "replica": 0}}
+  {"Start": {"cell": "shop.web", "node": "ops-1", "replica": 0}}
+## upgrade to the final build (2026-11-15T20:36:21Z): binaries replaced, every unit restarted, data kept
+## shop-net plan --net ops1 after apply
+{
+  "actions": 0,
+  "network": "ops1",
+  "plan": []
+}
+## shop-net verify --net ops1
+ok: True
+  PASS shop.keys#0@ops-1 - hash 2340f1975c875604 
+  PASS shop.catalog#0@ops-1 - hash d21b58a48448224f 
+  PASS shop.cart#0@ops-1 - hash e7d75bfc37777416 
+  PASS shop.pay.sim#0@ops-1 - hash 5e05f28377a86123 
+  PASS shop.pay#0@ops-1 - hash 35db6be584f02231 
+  PASS shop.inventory#0@sim-a - hash 2da021846a688e58 Leader epoch 3 commit 18
+  PASS shop.inventory#1@sim-b - hash 2da021846a688e58 Follower epoch 3 commit 18
+  PASS shop.inventory#2@sim-c - hash 2da021846a688e58 Follower epoch 3 commit 18
+  PASS shop.orders#0@sim-a - hash d080ff1f69856534 Leader epoch 2 commit 30
+  PASS shop.orders#1@sim-b - hash d080ff1f69856534 Follower epoch 2 commit 30
+  PASS shop.orders#2@sim-c - hash d080ff1f69856534 Follower epoch 2 commit 30
+  PASS shop.gateway#0@ops-1 - hash 07ccae65a54ea0b7 
+  PASS shop.web#0@ops-1 - http listener
+  PASS shop.inventory leader - {"3": "127.0.0.1:21305"}
+  PASS shop.orders leader - {"2": "127.0.0.1:21311"}
+  PASS smoke: gateway Products - 6 products
+## systemctl --user list-units 'live-shop-ops1-*'
+  live-shop-ops1-shop-cart-0.service      loaded active running cell shop shop.cart replica 0 on ops-1 (ops1)
+  live-shop-ops1-shop-catalog-0.service   loaded active running cell shop shop.catalog replica 0 on ops-1 (ops1)
+  live-shop-ops1-shop-gateway-0.service   loaded active running cell shop shop.gateway replica 0 on ops-1 (ops1)
+  live-shop-ops1-shop-inventory-0.service loaded active running cell shop shop.inventory replica 0 on sim-a (ops1)
+  live-shop-ops1-shop-inventory-1.service loaded active running cell shop shop.inventory replica 1 on sim-b (ops1)
+  live-shop-ops1-shop-inventory-2.service loaded active running cell shop shop.inventory replica 2 on sim-c (ops1)
+  live-shop-ops1-shop-keys-0.service      loaded active running cell shop shop.keys replica 0 on ops-1 (ops1)
+  live-shop-ops1-shop-orders-0.service    loaded active running cell shop shop.orders replica 0 on sim-a (ops1)
+  live-shop-ops1-shop-orders-1.service    loaded active running cell shop shop.orders replica 1 on sim-b (ops1)
+  live-shop-ops1-shop-orders-2.service    loaded active running cell shop shop.orders replica 2 on sim-c (ops1)
+  live-shop-ops1-shop-pay-0.service       loaded active running cell shop shop.pay replica 0 on ops-1 (ops1)
+  live-shop-ops1-shop-pay-sim-0.service   loaded active running cell shop shop.pay.sim replica 0 on ops-1 (ops1)
+  live-shop-ops1-shop-web-0.service       loaded active running cell shop shop.web replica 0 on ops-1 (ops1)

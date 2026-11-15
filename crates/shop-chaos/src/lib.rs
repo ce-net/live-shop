@@ -376,22 +376,24 @@ pub async fn kill_mid_checkout(seed: u64, base_port: u16, o: &Opts) -> Result<Re
         // mid-checkout: at least 20 units held by sagas between reserve and commit, read on every replica
         // (a follower may lag)
         let wait_end = Instant::now() + Duration::from_secs(60);
-        let mut held = 0;
         let addrs = fenv.net.directory().addrs("shop.inventory");
-        while Instant::now() < wait_end {
-            let mut best = (0u32, 0u32);
+        let held_now = || async {
+            let mut best = 0u32;
             for a in &addrs {
                 if let Ok(Ok(l)) = Client::with(a.clone(), Some(fenv.op.clone())).call::<inv::Levels>(&LevelsReq { skus: vec![Sku("tent-2p".into())] }).await {
-                    if let Some(l) = l.first() {
-                        best = best.max((l.reserved, l.committed));
-                    }
+                    best = best.max(l.first().map(|l| l.reserved).unwrap_or(0));
                 }
             }
-            held = best.0;
-            if best.0 >= 20 {
+            best
+        };
+        let mut held = 0;
+        while Instant::now() < wait_end {
+            held = held_now().await;
+            if held >= 20 {
                 // a seeded moment inside the window, then make sure it is still open
                 tokio::time::sleep(Duration::from_millis(jitter)).await;
-                if fenv.inv().call::<inv::Levels>(&LevelsReq { skus: vec![Sku("tent-2p".into())] }, shop_inventory_api::redirect, Duration::from_secs(2)).await.is_ok_and(|r| r.is_ok_and(|l| l[0].reserved >= 20)) {
+                held = held_now().await;
+                if held >= 20 {
                     break;
                 }
             }

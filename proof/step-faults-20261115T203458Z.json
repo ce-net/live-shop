@@ -1,0 +1,123 @@
+{
+  "ok": true,
+  "rows": [
+    {
+      "crashes": 2,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 1,
+      "token": "Ok",
+      "when": "started"
+    },
+    {
+      "crashes": 3,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 1,
+      "token": "Ok",
+      "when": "done"
+    },
+    {
+      "crashes": 3,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 2,
+      "token": "Ok",
+      "when": "started"
+    },
+    {
+      "crashes": 2,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 2,
+      "token": "Ok",
+      "when": "done"
+    },
+    {
+      "crashes": 2,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 3,
+      "token": "Ok",
+      "when": "started"
+    },
+    {
+      "crashes": 3,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 3,
+      "token": "Ok",
+      "when": "done"
+    },
+    {
+      "crashes": 3,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 4,
+      "token": "Ok",
+      "when": "started"
+    },
+    {
+      "crashes": 1,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 4,
+      "token": "Ok",
+      "when": "done"
+    },
+    {
+      "crashes": 1,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 5,
+      "token": "Ok",
+      "when": "done"
+    },
+    {
+      "crashes": 3,
+      "detail": "",
+      "legal": true,
+      "stage": "Failed(Declined(\"declined by test token\"))",
+      "step": 3,
+      "token": "Declined",
+      "when": "started"
+    },
+    {
+      "crashes": 3,
+      "detail": "",
+      "legal": true,
+      "stage": "Failed(Declined(\"declined by test token\"))",
+      "step": 12,
+      "token": "Declined",
+      "when": "started"
+    },
+    {
+      "crashes": 1,
+      "detail": "",
+      "legal": true,
+      "stage": "Failed(Declined(\"declined by test token\"))",
+      "step": 12,
+      "token": "Declined",
+      "when": "done"
+    },
+    {
+      "crashes": 2,
+      "detail": "",
+      "legal": true,
+      "stage": "Confirmed",
+      "step": 3,
+      "token": "SlowWebhook",
+      "when": "done"
+    }
+  ],
+  "scenario": "step-faults"
+}

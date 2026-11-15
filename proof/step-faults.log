@@ -1,0 +1,14 @@
+StepRow { step: 1, when: "started", token: "Ok", crashes: 2, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 1, when: "done", token: "Ok", crashes: 3, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 2, when: "started", token: "Ok", crashes: 3, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 2, when: "done", token: "Ok", crashes: 2, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 3, when: "started", token: "Ok", crashes: 2, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 3, when: "done", token: "Ok", crashes: 3, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 4, when: "started", token: "Ok", crashes: 3, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 4, when: "done", token: "Ok", crashes: 1, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 5, when: "done", token: "Ok", crashes: 1, stage: "Confirmed", legal: true, detail: "" }
+StepRow { step: 3, when: "started", token: "Declined", crashes: 3, stage: "Failed(Declined(\"declined by test token\"))", legal: true, detail: "" }
+StepRow { step: 12, when: "started", token: "Declined", crashes: 3, stage: "Failed(Declined(\"declined by test token\"))", legal: true, detail: "" }
+StepRow { step: 12, when: "done", token: "Declined", crashes: 1, stage: "Failed(Declined(\"declined by test token\"))", legal: true, detail: "" }
+StepRow { step: 3, when: "done", token: "SlowWebhook", crashes: 2, stage: "Confirmed", legal: true, detail: "" }
+wrote proof/step-faults-20261115T203458Z.json ok=true

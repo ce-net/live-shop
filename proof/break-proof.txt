@@ -1,0 +1,26 @@
+break-proof: rename shop.catalog Product.title -> Product.name in a copy of the workspace
+
+== generated client diff (sdk/ts/shop_gateway.ts)
+5c5
+< export const SCHEMA_HASH = "07ccae65a54ea0b7";
+---
+> export const SCHEMA_HASH = "322fc09bc113d210";
+111c111
+<   title: string;
+---
+>   name: string;
+
+== tsc --noEmit -p web (must fail)
+exit: non-zero (refused)
+../../../..<copy>/web/src/app.ts(85,33): error TS2339: Property 'title' does not exist on type 'Product'.
+../../../..<copy>/web/src/app.ts(101,21): error TS2339: Property 'title' does not exist on type 'Product'.
+../../../..<copy>/web/src/sim.ts(7,8): error TS2353: Object literal may only specify known properties, and 'title' does not exist in type 'Product'.
+../../../..<copy>/web/src/sim.ts(31,32): error TS2339: Property 'title' does not exist on type 'Product'.
+
+== cargo check -p shop-catalog (Rust caller, must fail)
+exit: non-zero (refused)
+error[E0560]: struct `shop_catalog_api::Product` has no field named `title`
+error[E0609]: no field `title` on type `&shop_catalog_api::Product`
+error: could not compile `shop-catalog` (bin "shop-catalog") due to 2 previous errors
+
+result: PASS: a renamed contract field breaks the frontend build and the Rust build

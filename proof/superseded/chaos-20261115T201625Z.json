@@ -1,0 +1,2609 @@
+{
+  "command": "kill-mid-checkout --runs 20 --seed 1000 --out proof",
+  "failed": 0,
+  "passed": 20,
+  "reports": [
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 4,
+        "failed_other": 0,
+        "failed_out_of_stock": 146,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.046669001,
+      "seed": 1000,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          2031,
+          "StopNode sim-b (inventory leader) with 26 units reserved by sagas between reserve and commit"
+        ],
+        [
+          4151,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          5037,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          22123,
+          "Heal: restarted sim-b, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 409,
+            "lengths": [
+              409,
+              409,
+              409
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 6,
+        "failed_other": 0,
+        "failed_out_of_stock": 144,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.281421686,
+      "seed": 1001,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          2340,
+          "StopNode sim-c (inventory leader) with 7 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3625,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          5347,
+          "StopNode sim-a (orders leader)"
+        ],
+        [
+          22439,
+          "Heal: restarted sim-c, sim-a"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 47,
+            "replicas": [
+              {
+                "committed": 47,
+                "consumed": 47,
+                "on_hand": 3,
+                "reserved": 0
+              },
+              {
+                "committed": 47,
+                "consumed": 47,
+                "on_hand": 3,
+                "reserved": 0
+              },
+              {
+                "committed": 47,
+                "consumed": 47,
+                "on_hand": 3,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 11745300,
+            "confirmed_total": 11745300,
+            "net": 11745300,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 153,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 409,
+            "lengths": [
+              409,
+              409,
+              409
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 47,
+        "failed_declined": 6,
+        "failed_other": 0,
+        "failed_out_of_stock": 147,
+        "ledger_rows": 47,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 22.850335796,
+      "seed": 1002,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1505,
+          "StopNode sim-a (inventory leader) with 31 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3362,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4512,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          21521,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 0,
+        "failed_other": 0,
+        "failed_out_of_stock": 150,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.375990442,
+      "seed": 1003,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1810,
+          "StopNode sim-a (inventory leader) with 43 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3675,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4826,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          21830,
+          "Heal: restarted sim-a, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 6,
+        "failed_other": 0,
+        "failed_out_of_stock": 144,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.218708965,
+      "seed": 1004,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          2241,
+          "StopNode sim-a (inventory leader) with 3 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3351,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          5251,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          22257,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 48,
+            "replicas": [
+              {
+                "committed": 48,
+                "consumed": 48,
+                "on_hand": 2,
+                "reserved": 0
+              },
+              {
+                "committed": 48,
+                "consumed": 48,
+                "on_hand": 2,
+                "reserved": 0
+              },
+              {
+                "committed": 48,
+                "consumed": 48,
+                "on_hand": 2,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 11995200,
+            "confirmed_total": 11995200,
+            "net": 11995200,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 152,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 48,
+        "failed_declined": 7,
+        "failed_other": 0,
+        "failed_out_of_stock": 145,
+        "ledger_rows": 48,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 22.717457797,
+      "seed": 1005,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1662,
+          "StopNode sim-a (inventory leader) with 48 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3739,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4734,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          21743,
+          "Heal: restarted sim-a, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 49,
+            "replicas": [
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12245100,
+            "confirmed_total": 12245100,
+            "net": 12245100,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 151,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 418,
+            "lengths": [
+              418,
+              418,
+              418
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 49,
+        "failed_declined": 5,
+        "failed_other": 0,
+        "failed_out_of_stock": 146,
+        "ledger_rows": 49,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.965357683,
+      "seed": 1006,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1814,
+          "StopNode sim-a (inventory leader) with 50 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3798,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4820,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          21882,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 48,
+            "replicas": [
+              {
+                "committed": 48,
+                "consumed": 48,
+                "on_hand": 2,
+                "reserved": 0
+              },
+              {
+                "committed": 48,
+                "consumed": 48,
+                "on_hand": 2,
+                "reserved": 0
+              },
+              {
+                "committed": 48,
+                "consumed": 48,
+                "on_hand": 2,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 11995200,
+            "confirmed_total": 11995200,
+            "net": 11995200,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 152,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 436,
+            "lengths": [
+              436,
+              436,
+              436
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 48,
+        "failed_declined": 11,
+        "failed_other": 0,
+        "failed_out_of_stock": 141,
+        "ledger_rows": 48,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.521369064,
+      "seed": 1007,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1780,
+          "StopNode sim-a (inventory leader) with 49 units reserved by sagas between reserve and commit"
+        ],
+        [
+          4644,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4791,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          21820,
+          "Heal: restarted sim-a, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 409,
+            "lengths": [
+              409,
+              409,
+              409
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 7,
+        "failed_other": 0,
+        "failed_out_of_stock": 143,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.405803515,
+      "seed": 1008,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1892,
+          "StopNode sim-a (inventory leader) with 27 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3455,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4912,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          21939,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 2,
+        "failed_other": 0,
+        "failed_out_of_stock": 148,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.269014802,
+      "seed": 1009,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1654,
+          "StopNode sim-a (inventory leader) with 8 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3362,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4681,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          21722,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 3,
+        "failed_other": 0,
+        "failed_out_of_stock": 147,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 22.55508919,
+      "seed": 1010,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1136,
+          "StopNode sim-a (inventory leader) with 21 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3802,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4149,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          21174,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 409,
+            "lengths": [
+              409,
+              409,
+              409
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 4,
+        "failed_other": 0,
+        "failed_out_of_stock": 146,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 22.83811515,
+      "seed": 1011,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1595,
+          "StopNode sim-b (inventory leader) with 44 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3418,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4605,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          21612,
+          "Heal: restarted sim-b, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 45,
+            "replicas": [
+              {
+                "committed": 45,
+                "consumed": 45,
+                "on_hand": 5,
+                "reserved": 0
+              },
+              {
+                "committed": 45,
+                "consumed": 45,
+                "on_hand": 5,
+                "reserved": 0
+              },
+              {
+                "committed": 45,
+                "consumed": 45,
+                "on_hand": 5,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 11245500,
+            "confirmed_total": 11245500,
+            "net": 11245500,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 155,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 409,
+            "lengths": [
+              409,
+              409,
+              409
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 45,
+        "failed_declined": 7,
+        "failed_other": 0,
+        "failed_out_of_stock": 148,
+        "ledger_rows": 45,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 22.509248954,
+      "seed": 1012,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1425,
+          "StopNode sim-a (inventory leader) with 32 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3156,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4435,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          21437,
+          "Heal: restarted sim-a, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 5,
+        "failed_other": 0,
+        "failed_out_of_stock": 145,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.12482232,
+      "seed": 1013,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          2012,
+          "StopNode sim-b (inventory leader) with 2 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3117,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          5017,
+          "StopNode sim-a (orders leader)"
+        ],
+        [
+          22068,
+          "Heal: restarted sim-b, sim-a"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 49,
+            "replicas": [
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12245100,
+            "confirmed_total": 12245100,
+            "net": 12245100,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 151,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 411,
+            "lengths": [
+              411,
+              411,
+              411
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 49,
+        "failed_declined": 6,
+        "failed_other": 0,
+        "failed_out_of_stock": 145,
+        "ledger_rows": 49,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 22.600349385,
+      "seed": 1014,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1700,
+          "StopNode sim-a (inventory leader) with 26 units reserved by sagas between reserve and commit"
+        ],
+        [
+          4368,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4707,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          21714,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 49,
+            "replicas": [
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12245100,
+            "confirmed_total": 12245100,
+            "net": 12245100,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 151,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 49,
+        "failed_declined": 7,
+        "failed_other": 0,
+        "failed_out_of_stock": 144,
+        "ledger_rows": 49,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.052294779,
+      "seed": 1015,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1653,
+          "StopNode sim-c (inventory leader) with 28 units reserved by sagas between reserve and commit"
+        ],
+        [
+          4277,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4663,
+          "StopNode sim-a (orders leader)"
+        ],
+        [
+          21783,
+          "Heal: restarted sim-c, sim-a"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 49,
+            "replicas": [
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              },
+              {
+                "committed": 49,
+                "consumed": 49,
+                "on_hand": 1,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12245100,
+            "confirmed_total": 12245100,
+            "net": 12245100,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 151,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 408,
+            "lengths": [
+              408,
+              408,
+              408
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 49,
+        "failed_declined": 8,
+        "failed_other": 0,
+        "failed_out_of_stock": 143,
+        "ledger_rows": 49,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.593477369,
+      "seed": 1016,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          2184,
+          "StopNode sim-a (inventory leader) with 5 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3313,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          5194,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          22213,
+          "Heal: restarted sim-a, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 410,
+            "lengths": [
+              410,
+              410,
+              410
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 1,
+        "failed_other": 0,
+        "failed_out_of_stock": 149,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.421004516,
+      "seed": 1017,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1430,
+          "StopNode sim-a (inventory leader) with 47 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3273,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4443,
+          "StopNode sim-c (orders leader)"
+        ],
+        [
+          21453,
+          "Heal: restarted sim-a, sim-c"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 411,
+            "lengths": [
+              411,
+              411,
+              411
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 7,
+        "failed_other": 0,
+        "failed_out_of_stock": 143,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.651567149,
+      "seed": 1018,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          2283,
+          "StopNode sim-a (inventory leader) with 9 units reserved by sagas between reserve and commit"
+        ],
+        [
+          3456,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          5291,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          22295,
+          "Heal: restarted sim-a, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    },
+    {
+      "buyers": 200,
+      "checks": [
+        {
+          "id": "A1",
+          "numbers": {
+            "confirmed_units": 50,
+            "replicas": [
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              },
+              {
+                "committed": 50,
+                "consumed": 50,
+                "on_hand": 0,
+                "reserved": 0
+              }
+            ],
+            "stock": 50
+          },
+          "ok": true,
+          "what": "no oversell: confirmed units <= stock and equal to stock consumed on every inventory replica"
+        },
+        {
+          "id": "A2",
+          "numbers": {
+            "buyers_seeing_2+_order_ids": 0,
+            "checkouts_with_2+_orders": 0,
+            "ids_not_derived_from_checkout": 0,
+            "orders": 200
+          },
+          "ok": true,
+          "what": "no double order: every checkout id maps to at most one order"
+        },
+        {
+          "id": "A3",
+          "numbers": {
+            "answer_differs_from_order": 0,
+            "buyers": 200,
+            "without_final_answer": 0
+          },
+          "ok": true,
+          "what": "no lost order: every buyer got a final answer, equal to what the order says now"
+        },
+        {
+          "id": "A4",
+          "numbers": {
+            "captured": 12495000,
+            "confirmed_total": 12495000,
+            "net": 12495000,
+            "orders_with_2+_captures": 0,
+            "refunded": 0
+          },
+          "ok": true,
+          "what": "money matches: captured minus refunded equals the totals of confirmed orders; at most one capture per order"
+        },
+        {
+          "id": "A5",
+          "numbers": {
+            "captures_kept_without_confirmed_order": 0,
+            "failed_orders": 150,
+            "reservations_of_failed_orders": 0,
+            "uncommitted_reservations": 0
+          },
+          "ok": true,
+          "what": "no orphan: no reservation left for a failed order, no capture kept for an order that is not confirmed"
+        },
+        {
+          "id": "A6",
+          "numbers": {
+            "commit_index": 409,
+            "lengths": [
+              409,
+              409,
+              409
+            ],
+            "replicas_read": 3
+          },
+          "ok": true,
+          "what": "logs agree: the three inventory logs are identical up to the commit index after heal"
+        }
+      ],
+      "counts": {
+        "buyers_retried": 0,
+        "checkout_attempts": 200,
+        "confirmed": 50,
+        "failed_declined": 6,
+        "failed_other": 0,
+        "failed_out_of_stock": 144,
+        "ledger_rows": 50,
+        "orders": 200
+      },
+      "ok": true,
+      "scenario": "kill-mid-checkout",
+      "seconds": 23.29394772,
+      "seed": 1019,
+      "stock": 50,
+      "timeline": [
+        [
+          0,
+          "network up and seeded: tent-2p 50 on hand, 5 other skus 500 each"
+        ],
+        [
+          1991,
+          "StopNode sim-c (inventory leader) with 2 units reserved by sagas between reserve and commit"
+        ],
+        [
+          2918,
+          "every buyer has a final answer (or gave up at the deadline)"
+        ],
+        [
+          4996,
+          "StopNode sim-b (orders leader)"
+        ],
+        [
+          22002,
+          "Heal: restarted sim-c, sim-b"
+        ]
+      ],
+      "unsafe_no_quorum": false
+    }
+  ],
+  "runs": 20,
+  "scenario": "kill-mid-checkout"
+}
