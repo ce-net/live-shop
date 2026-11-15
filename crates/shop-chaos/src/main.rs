@@ -1,4 +1,4 @@
-//! `shop-chaos kill-mid-checkout [--runs N] [--seed S] [--buyers 200] [--outage 20] [--unsafe-no-quorum] [--out proof]`
+//! `shop-chaos kill-mid-checkout [--runs N] [--seed S] [--buyers 200] [--outage 20] [--second-stop-ms 1000] [--unsafe-no-quorum] [--out proof]`
 //! `shop-chaos step-faults [--out proof]`
 //! `shop-chaos smoke`
 //!
@@ -32,7 +32,7 @@ async fn main() {
         Some("kill-mid-checkout") => {
             let runs: u64 = flag("--runs", "1").parse().unwrap();
             let seed: u64 = flag("--seed", "1").parse().unwrap();
-            let o = Opts { buyers: flag("--buyers", "200").parse().unwrap(), stock: 50, unsafe_no_quorum: has("--unsafe-no-quorum"), outage_s: flag("--outage", "20").parse().unwrap() };
+            let o = Opts { buyers: flag("--buyers", "200").parse().unwrap(), stock: 50, unsafe_no_quorum: has("--unsafe-no-quorum"), outage_s: flag("--outage", "20").parse().unwrap(), second_stop_ms: flag("--second-stop-ms", "1000").parse().unwrap() };
             let mut reports = Vec::new();
             let mut failed = 0;
             for r in 0..runs {

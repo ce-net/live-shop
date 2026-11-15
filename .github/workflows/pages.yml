@@ -28,7 +28,7 @@ jobs:
           cp -r web/img web/fonts _site/
           cp web/dist/app.js _site/dist/
           echo '{ "mode": "sim" }' > _site/config.json
-          cp -r proof _site/proof
+          if [ -d proof ]; then cp -r proof _site/proof; fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

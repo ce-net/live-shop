@@ -368,14 +368,13 @@ pub async fn verify(net: &Network) -> Verify {
     Verify { ok: checks.iter().all(|c| c.1), checks }
 }
 
-/// Where the cell binaries are: next to the running binary (`target/<profile>/`).
+/// Where the cell binaries are: `SHOP_BIN`, else the nearest directory above the running binary that holds
+/// them (`target/<profile>/`; test binaries live deeper, in `deps/` or the build dir).
 pub fn bin_dir() -> PathBuf {
-    let exe = std::env::current_exe().unwrap();
-    let d = exe.parent().unwrap().to_path_buf();
-    // test binaries live in target/<profile>/deps
-    if d.ends_with("deps") {
-        d.parent().unwrap().to_path_buf()
-    } else {
-        d
+    if let Ok(d) = std::env::var("SHOP_BIN") {
+        return PathBuf::from(d);
     }
+    let exe = std::env::current_exe().unwrap();
+    let start = exe.parent().unwrap().to_path_buf();
+    start.ancestors().find(|a| a.join("shop-keys").is_file()).map(Path::to_path_buf).unwrap_or(start)
 }

@@ -330,10 +330,13 @@ pub struct Opts {
     pub stock: u32,
     pub unsafe_no_quorum: bool,
     pub outage_s: u64,
+    /// Delay between stopping the inventory leader's node and the orders leader's node.
+    pub second_stop_ms: u64,
 }
 
 /// Scenario `kill-mid-checkout`: while at least 20 sagas hold a reservation, stop every cell of the node with
-/// the inventory leader; 3 s later stop the orders leader's node if it is another one; heal after the outage.
+/// the inventory leader; `second_stop_ms` later stop the orders leader's node if it is another one; heal after
+/// the outage.
 pub async fn kill_mid_checkout(seed: u64, base_port: u16, o: &Opts) -> Result<Report, String> {
     let t0 = Instant::now();
     let unsafe_ = o.unsafe_no_quorum;
@@ -364,12 +367,12 @@ pub async fn kill_mid_checkout(seed: u64, base_port: u16, o: &Opts) -> Result<Re
         tasks.push(tokio::spawn(buy(g, n, format!("test-b{n}-s{seed}@live.shop"), format!("k-{seed}-{n:04}"), "tent-2p", token, deadline)));
     }
     // the fault
-    let delay = 200 + rng.below(1300);
+    let jitter = rng.below(60);
     let fenv = env.clone();
     let tl = timeline.clone();
     let outage = o.outage_s;
+    let second_ms = o.second_stop_ms;
     let fault = tokio::spawn(async move {
-        tokio::time::sleep(Duration::from_millis(delay)).await;
         // mid-checkout: at least 20 units held by sagas between reserve and commit, read on every replica
         // (a follower may lag)
         let wait_end = Instant::now() + Duration::from_secs(60);
@@ -386,9 +389,13 @@ pub async fn kill_mid_checkout(seed: u64, base_port: u16, o: &Opts) -> Result<Re
             }
             held = best.0;
             if best.0 >= 20 {
-                break;
+                // a seeded moment inside the window, then make sure it is still open
+                tokio::time::sleep(Duration::from_millis(jitter)).await;
+                if fenv.inv().call::<inv::Levels>(&LevelsReq { skus: vec![Sku("tent-2p".into())] }, shop_inventory_api::redirect, Duration::from_secs(2)).await.is_ok_and(|r| r.is_ok_and(|l| l[0].reserved >= 20)) {
+                    break;
+                }
             }
-            tokio::time::sleep(Duration::from_millis(15)).await;
+            tokio::time::sleep(Duration::from_millis(5)).await;
         }
         let Some(n1) = fenv.leader_node("shop.inventory").await else {
             tl.lock().unwrap().push((ms(), "no inventory leader found; no fault".into()));
@@ -397,7 +404,7 @@ pub async fn kill_mid_checkout(seed: u64, base_port: u16, o: &Opts) -> Result<Re
         fenv.stop_node(&n1);
         tl.lock().unwrap().push((ms(), format!("StopNode {n1} (inventory leader) with {held} units reserved by sagas between reserve and commit")));
         let mut stopped = vec![n1.clone()];
-        tokio::time::sleep(Duration::from_secs(3)).await;
+        tokio::time::sleep(Duration::from_millis(second_ms)).await;
         match fenv.leader_node("shop.orders").await {
             Some(n2) if n2 != n1 => {
                 fenv.stop_node(&n2);
@@ -407,7 +414,7 @@ pub async fn kill_mid_checkout(seed: u64, base_port: u16, o: &Opts) -> Result<Re
             Some(n2) => tl.lock().unwrap().push((ms(), format!("orders leader already re-elected on {n2}; it is a running node: second stop skipped (would leave no majority)"))),
             None => tl.lock().unwrap().push((ms(), "orders leader was on the stopped node; second stop skipped".into())),
         }
-        tokio::time::sleep(Duration::from_secs(outage.saturating_sub(3))).await;
+        tokio::time::sleep(Duration::from_millis((outage * 1000).saturating_sub(second_ms))).await;
         for n in &stopped {
             fenv.start_node(n);
         }
