@@ -1,0 +1,11 @@
+[package]
+name = "shop-store"
+description = "Durable local records for cell shop's single-instance cells, with hybrid-logical-clock last-writer-wins values for per-field merge"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true

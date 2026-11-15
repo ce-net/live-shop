@@ -1,0 +1,13 @@
+[package]
+name = "shop-wire"
+description = "The typed-call runtime of cell shop: api! contracts (types + ops + rights), TypeScript generation from the same tokens, a schema hash checked on every call, and the client and server over TCP"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+shop-chain.workspace = true

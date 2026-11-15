@@ -1,0 +1,14 @@
+[package]
+name = "shop-cell"
+description = "Boot of every cell shop cell: flags, the network directory, enrollment with shop.keys, the gate"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+shop-wire.workspace = true
+shop-keys-api.workspace = true

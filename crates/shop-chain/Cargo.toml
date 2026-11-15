@@ -1,0 +1,15 @@
+[package]
+name = "shop-chain"
+description = "Attenuating capability chains for cell shop: verify and narrow with tenant, customer, checkout, order, amount, once and expiry caveats (the cap v3 caveats slice 1 needs)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+hex.workspace = true
+ed25519-dalek.workspace = true
+getrandom.workspace = true

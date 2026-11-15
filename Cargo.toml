@@ -1,0 +1,44 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+authors = ["Leif Rydenfalk"]
+repository = "https://github.com/ce-net/live-shop"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+sha2 = "0.10"
+hex = "0.4"
+hmac = "0.12"
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+getrandom = "0.2"
+shop-wire = { path = "crates/shop-wire" }
+shop-chain = { path = "crates/shop-chain" }
+shop-types = { path = "crates/shop-types" }
+shop-policy = { path = "crates/shop-policy" }
+shop-store = { path = "crates/shop-store" }
+shop-replog = { path = "crates/shop-replog" }
+shop-keys-api = { path = "crates/shop-keys-api" }
+shop-catalog-api = { path = "crates/shop-catalog-api" }
+shop-inventory-api = { path = "crates/shop-inventory-api" }
+shop-inventory-peer-api = { path = "crates/shop-inventory-peer-api" }
+shop-cart-api = { path = "crates/shop-cart-api" }
+shop-pay-sim-api = { path = "crates/shop-pay-sim-api" }
+shop-pay-api = { path = "crates/shop-pay-api" }
+shop-orders-api = { path = "crates/shop-orders-api" }
+shop-orders-peer-api = { path = "crates/shop-orders-peer-api" }
+shop-gateway-api = { path = "crates/shop-gateway-api" }
+shop-net = { path = "crates/shop-net" }
+
+[profile.dev]
+debug = 0
+
+[profile.release]
+debug = 0
+codegen-units = 16

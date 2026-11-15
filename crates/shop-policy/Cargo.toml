@@ -1,0 +1,19 @@
+[package]
+name = "shop-policy"
+description = "Least-privilege rights of every cell shop cell, written against the op types so a grant naming a missing op does not compile"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true
+shop-keys-api.workspace = true
+shop-catalog-api.workspace = true
+shop-inventory-api.workspace = true
+shop-inventory-peer-api.workspace = true
+shop-cart-api.workspace = true
+shop-pay-sim-api.workspace = true
+shop-pay-api.workspace = true
+shop-orders-api.workspace = true
+shop-orders-peer-api.workspace = true
