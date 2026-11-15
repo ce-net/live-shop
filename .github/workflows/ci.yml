@@ -1,0 +1,32 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  build-test-prove:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci --prefix web --no-audit --no-fund
+      - name: build every cell
+        run: cargo build --workspace --release --locked
+      - name: generated client matches the contracts; the page compiles against it
+        run: cargo run --release --locked -p xtask -- check
+      - run: npm run build --prefix web
+      - name: unit, in-process replica and typed end-to-end tests
+        run: cargo test --workspace --release --locked
+      - name: a renamed contract field must break the page and the Rust caller
+        run: cargo run --release --locked -p xtask -- break-proof
+      - name: chaos proof (2 seeded runs)
+        run: target/release/shop-chaos kill-mid-checkout --runs 2 --seed 7 --buyers 120 --out ci-proof
+      - name: saga step-boundary faults
+        run: target/release/shop-chaos step-faults --out ci-proof
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ci-proof
+          path: ci-proof

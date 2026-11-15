@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cell shop</title>
+<meta name="description" content="A store where every part is a cell with a typed contract: catalog, cart, inventory on three replicas, the order saga, test payments, the gateway and this page.">
+<link rel="icon" href="img/icon.svg">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="style.css">
+<script>try{var t=localStorage.getItem("ce-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#/">cell shop</a>
+  <span id="mode" class="pill">…</span>
+  <nav><button id="theme" class="ghost" aria-label="Switch light or dark">◐</button><a class="cart" href="#/cart">Cart <span id="cart-n"></span></a></nav>
+</header>
+<main id="app" aria-live="polite"><p class="lede">Loading…</p></main>
+<footer>
+  <p>A live system on ce-net. Payments are test mode only: no card, no real money.</p>
+  <p>Leif Rydenfalk · <span id="addr">Kungsgatan 103, 903 31 Umeå, Sweden</span> · <a href="https://github.com/ce-net/live-shop">source</a></p>
+</footer>
+<script>document.getElementById("theme").addEventListener("click",function(){var r=document.documentElement,n=r.dataset.theme==="light"?"dark":"light";r.dataset.theme=n;try{localStorage.setItem("ce-theme",n)}catch(e){}});</script>
+<script type="module" src="dist/app.js"></script>
+</body>
+</html>

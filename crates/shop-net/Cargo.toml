@@ -1,0 +1,25 @@
+[package]
+name = "shop-net"
+description = "cell shop's deployment as typed Rust: the network, placement, plan (diff against what answers), apply, verify, seed"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+shop-wire.workspace = true
+shop-types.workspace = true
+shop-cell = { path = "../shop-cell" }
+shop-keys-api.workspace = true
+shop-catalog-api.workspace = true
+shop-inventory-api.workspace = true
+shop-inventory-peer-api.workspace = true
+shop-cart-api.workspace = true
+shop-pay-sim-api.workspace = true
+shop-pay-api.workspace = true
+shop-orders-api.workspace = true
+shop-orders-peer-api.workspace = true
+shop-gateway-api.workspace = true
