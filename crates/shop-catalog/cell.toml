@@ -1,0 +1,10 @@
+# cell shop.catalog: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.catalog"
+crate = "shop-catalog"
+contract = "shop-catalog-api"
+replicas = 1
+
+[rights]
+holds = "none"
+serves = "shop.catalog:read, :price, :write"

@@ -1,0 +1,10 @@
+# cell shop.gateway: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.gateway"
+crate = "shop-gateway"
+contract = "shop-gateway-api"
+replicas = 1
+
+[rights]
+holds = "customer-facing rights, delegated per session and narrowed per checkout"
+serves = "shop.gateway:public"

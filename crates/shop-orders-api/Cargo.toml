@@ -1,0 +1,12 @@
+[package]
+name = "shop-orders-api"
+description = "Contract of shop.orders: the checkout saga (freeze, reserve, charge, commit, confirm) with compensation"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true
+shop-types.workspace = true
+shop-pay-api.workspace = true

@@ -1,0 +1,17 @@
+[package]
+name = "shop-catalog"
+description = "The shop.catalog cell: product records, prices, seed data"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+shop-wire.workspace = true
+shop-types.workspace = true
+shop-catalog-api.workspace = true
+shop-store.workspace = true
+shop-cell = { path = "../shop-cell" }

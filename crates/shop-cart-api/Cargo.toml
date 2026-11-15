@@ -1,0 +1,11 @@
+[package]
+name = "shop-cart-api"
+description = "Contract of shop.cart: a customer's cart, frozen per checkout while the order saga runs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true
+shop-types.workspace = true

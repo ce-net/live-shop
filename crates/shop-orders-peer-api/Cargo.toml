@@ -1,0 +1,13 @@
+[package]
+name = "shop-orders-peer-api"
+description = "Contract between shop.orders replicas: Vote, Append, Tail over the saga log entry"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true
+shop-types.workspace = true
+shop-replog.workspace = true
+shop-orders-api.workspace = true

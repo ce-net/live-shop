@@ -1,0 +1,12 @@
+[package]
+name = "shop-pay-api"
+description = "Contract of shop.pay: test-mode payments with idempotency keys, single-use charge chains and signed webhooks"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true
+shop-types.workspace = true
+shop-pay-sim-api.workspace = true

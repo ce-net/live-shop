@@ -1,0 +1,11 @@
+[package]
+name = "shop-inventory-api"
+description = "Contract of shop.inventory: stock levels and reservations decided by a quorum log, never by last-writer-wins"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true
+shop-types.workspace = true

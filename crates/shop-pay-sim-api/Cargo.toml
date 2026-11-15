@@ -1,0 +1,11 @@
+[package]
+name = "shop-pay-sim-api"
+description = "Contract of shop.pay.sim: the test payment provider (test tokens only, never a card)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true
+shop-types.workspace = true

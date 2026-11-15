@@ -1,0 +1,10 @@
+[package]
+name = "shop-keys-api"
+description = "Contract of shop.keys: cell identities, the tenant root public key, and named secrets (the only place secrets live)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+shop-wire.workspace = true

@@ -1,0 +1,11 @@
+# cell shop.pay.sim: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.pay.sim"
+crate = "shop-pay-sim"
+contract = "shop-pay-sim-api"
+replicas = 1
+payments = "test mode only"
+
+[rights]
+holds = "shop.pay:webhook; shop.keys:secret/shop/pay/sim/webhook"
+serves = "shop.pay.sim:use, :read, :fault"

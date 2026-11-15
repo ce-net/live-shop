@@ -1,0 +1,10 @@
+# cell shop.cart: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.cart"
+crate = "shop-cart"
+contract = "shop-cart-api"
+replicas = 1
+
+[rights]
+holds = "shop.catalog:price"
+serves = "shop.cart:own, shop.cart:checkout"

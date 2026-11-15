@@ -1,0 +1,10 @@
+# cell shop.web: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.web"
+crate = "shop-web"
+contract = "(serves web/, built against sdk/ts/shop_gateway.ts)"
+replicas = 1
+
+[rights]
+holds = "none"
+serves = "http"

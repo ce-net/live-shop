@@ -1,0 +1,10 @@
+# cell shop.inventory: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.inventory"
+crate = "shop-inventory"
+contract = "shop-inventory-api + shop-inventory-peer-api"
+replicas = 3
+
+[rights]
+holds = "shop.inventory.peer:replicate"
+serves = "shop.inventory:read, :reserve, :restock"

@@ -1,0 +1,10 @@
+# cell shop.keys: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.keys"
+crate = "shop-keys"
+contract = "shop-keys-api"
+replicas = 1
+
+[rights]
+holds = "none (it signs the others' grants)"
+serves = "shop.keys:public, shop.keys:secret"

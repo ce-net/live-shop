@@ -1,0 +1,10 @@
+# cell shop.orders: one cell, one crate; callers depend only on its contract crate
+[cell]
+name = "shop.orders"
+crate = "shop-orders"
+contract = "shop-orders-api + shop-orders-peer-api"
+replicas = 3
+
+[rights]
+holds = "shop.inventory:reserve, :read; shop.pay:refund, :status; shop.orders.peer:replicate; shop.pay:charge only through a narrowed checkout chain"
+serves = "shop.orders:place, :own, :settle, :operate"
