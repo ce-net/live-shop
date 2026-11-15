@@ -1,11 +1,17 @@
 # cell shop.pay.sim: one cell, one crate; callers depend only on its contract crate
 [cell]
-name = "shop.pay.sim"
+api = "shop.pay.sim"
 crate = "shop-pay-sim"
+kind = "cell"
+owner = "Leif Rydenfalk"
 contract = "shop-pay-sim-api"
 replicas = 1
 payments = "test mode only"
+depends_on = ["shop.keys@1", "shop.pay@1"]
 
 [rights]
 holds = "shop.pay:webhook; shop.keys:secret/shop/pay/sim/webhook"
 serves = "shop.pay.sim:use, :read, :fault"
+
+[limits]
+disk_bytes = 536870912

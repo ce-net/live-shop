@@ -84,13 +84,15 @@ fn fnv64(s: &str) -> u64 {
 
 /// Hex schema hash of a contract, computed once per process.
 pub fn schema_hash<A: Api>() -> String {
-    static CACHE: OnceLock<Mutex<HashMap<&'static str, String>>> = OnceLock::new();
+    // keyed by type, not by name: two builds of one contract name (old and new) have different hashes
+    static CACHE: OnceLock<Mutex<HashMap<std::any::TypeId, String>>> = OnceLock::new();
     let m = CACHE.get_or_init(Default::default);
-    if let Some(h) = m.lock().unwrap().get(A::NAME) {
+    let k = std::any::TypeId::of::<A>();
+    if let Some(h) = m.lock().unwrap().get(&k) {
         return h.clone();
     }
     let h = format!("{:016x}", fnv64(&schema_text::<A>()));
-    m.lock().unwrap().insert(A::NAME, h.clone());
+    m.lock().unwrap().insert(k, h.clone());
     h
 }
 

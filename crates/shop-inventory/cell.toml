@@ -1,10 +1,16 @@
 # cell shop.inventory: one cell, one crate; callers depend only on its contract crate
 [cell]
-name = "shop.inventory"
+api = "shop.inventory"
 crate = "shop-inventory"
-contract = "shop-inventory-api + shop-inventory-peer-api"
+kind = "cell"
+owner = "Leif Rydenfalk"
+contract = "shop-inventory-api"
 replicas = 3
+depends_on = ["shop.keys@1", "shop.inventory.peer@1"]
 
 [rights]
 holds = "shop.inventory.peer:replicate"
 serves = "shop.inventory:read, :reserve, :restock"
+
+[limits]
+disk_bytes = 1073741824

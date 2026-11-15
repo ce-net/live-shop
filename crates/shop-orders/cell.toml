@@ -1,10 +1,16 @@
 # cell shop.orders: one cell, one crate; callers depend only on its contract crate
 [cell]
-name = "shop.orders"
+api = "shop.orders"
 crate = "shop-orders"
-contract = "shop-orders-api + shop-orders-peer-api"
+kind = "cell"
+owner = "Leif Rydenfalk"
+contract = "shop-orders-api"
 replicas = 3
+depends_on = ["shop.keys@1", "shop.orders.peer@1", "shop.cart@1", "shop.inventory@1", "shop.pay@1"]
 
 [rights]
 holds = "shop.inventory:reserve, :read; shop.pay:refund, :status; shop.orders.peer:replicate; shop.pay:charge only through a narrowed checkout chain"
 serves = "shop.orders:place, :own, :settle, :operate"
+
+[limits]
+disk_bytes = 1073741824

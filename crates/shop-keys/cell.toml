@@ -1,10 +1,16 @@
 # cell shop.keys: one cell, one crate; callers depend only on its contract crate
 [cell]
-name = "shop.keys"
+api = "shop.keys"
 crate = "shop-keys"
+kind = "cell"
+owner = "Leif Rydenfalk"
 contract = "shop-keys-api"
 replicas = 1
+depends_on = []
 
 [rights]
 holds = "none (it signs the others' grants)"
 serves = "shop.keys:public, shop.keys:secret"
+
+[limits]
+disk_bytes = 67108864
