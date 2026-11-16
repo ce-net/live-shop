@@ -14,3 +14,16 @@ serves = "shop.catalog:read, :price, :write"
 
 [limits]
 disk_bytes = 268435456
+
+[stamp]
+id = "cell:shop.catalog"
+kind = "cell"
+path = "crates/shop-catalog/cell.toml"
+updated_at = 2026-11-16T01:53:42Z
+version = "0.1.0"
+access = "public"
+canonical_of = []
+duplicate_of = ""
+owner = "foreman/Leif Rydenfalk"
+source_of_truth = "https://github.com/ce-net/live-shop"
+stale_after = 180

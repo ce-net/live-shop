@@ -15,3 +15,16 @@ serves = "shop.pay.sim:use, :read, :fault"
 
 [limits]
 disk_bytes = 536870912
+
+[stamp]
+id = "cell:shop.pay.sim"
+kind = "cell"
+path = "crates/shop-pay-sim/cell.toml"
+updated_at = 2026-11-16T01:53:42Z
+version = "0.1.0"
+access = "public"
+canonical_of = []
+duplicate_of = ""
+owner = "foreman/Leif Rydenfalk"
+source_of_truth = "https://github.com/ce-net/live-shop"
+stale_after = 180
