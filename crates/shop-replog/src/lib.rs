@@ -241,6 +241,12 @@ impl<M: Machine> State<M> {
     }
 }
 
+/// Idle heartbeat to each peer (SHOP_BEAT_MS, default 500 ms); writes wake replication at once, so this only
+/// bounds how fast a dead leader is noticed. The election timeout is 4-8 beats.
+fn beat_ms() -> u64 {
+    std::env::var("SHOP_BEAT_MS").ok().and_then(|v| v.parse().ok()).filter(|&v| v >= 10).unwrap_or(500)
+}
+
 fn rand_ms(lo: u64, hi: u64) -> Duration {
     let mut b = [0u8; 8];
     getrandom::getrandom(&mut b).unwrap();
@@ -340,7 +346,7 @@ impl<M: Machine> Log<M> {
             applied: 0,
             role: Role::Follower,
             leader: None,
-            deadline: Instant::now() + rand_ms(500 * slow, 1000 * slow),
+            deadline: Instant::now() + rand_ms(4 * beat_ms() * slow, 8 * beat_ms() * slow),
             m: M::default(),
             waiters: HashMap::new(),
             next: vec![1; n],
@@ -420,7 +426,7 @@ impl<M: Machine> Log<M> {
             s.voted = Some(r.candidate);
             s.save_meta();
             let slow = if self.unsafe_local_ack { 12 } else { 1 };
-            s.deadline = Instant::now() + rand_ms(500 * slow, 1000 * slow);
+            s.deadline = Instant::now() + rand_ms(4 * beat_ms() * slow, 8 * beat_ms() * slow);
         }
         VoteResp { term: s.term, granted }
     }
@@ -436,7 +442,7 @@ impl<M: Machine> Log<M> {
         }
         s.leader = Some(r.leader as usize);
         let slow = if self.unsafe_local_ack { 12 } else { 1 };
-        s.deadline = Instant::now() + rand_ms(500 * slow, 1000 * slow);
+        s.deadline = Instant::now() + rand_ms(4 * beat_ms() * slow, 8 * beat_ms() * slow);
         if s.term_at(r.prev_idx) != Some(r.prev_term) {
             let last = s.last().0.min(r.prev_idx.saturating_sub(1));
             return AppendResp { term: s.term, ok: false, last };
@@ -496,7 +502,7 @@ impl<M: Machine> Log<M> {
         let l = self.clone();
         tokio::spawn(async move {
             loop {
-                tokio::time::sleep(Duration::from_millis(40)).await;
+                tokio::time::sleep(Duration::from_millis((beat_ms() / 4).max(10))).await;
                 let due = {
                     let s = l.st.lock().unwrap();
                     s.role != Role::Leader && Instant::now() >= s.deadline
@@ -513,7 +519,7 @@ impl<M: Machine> Log<M> {
             }
             let l = self.clone();
             tokio::spawn(async move {
-                let beat = Duration::from_millis(if l.unsafe_local_ack { 3000 } else { 50 });
+                let beat = Duration::from_millis(if l.unsafe_local_ack { 3000 } else { beat_ms() });
                 loop {
                     if l.unsafe_local_ack {
                         tokio::time::sleep(beat).await;
@@ -535,7 +541,7 @@ impl<M: Machine> Log<M> {
             s.leader = None;
             s.save_meta();
             let slow = if self.unsafe_local_ack { 12 } else { 1 };
-            s.deadline = Instant::now() + rand_ms(500 * slow, 1000 * slow);
+            s.deadline = Instant::now() + rand_ms(4 * beat_ms() * slow, 8 * beat_ms() * slow);
             let (li, lt) = s.last();
             (VoteReq { term: s.term, candidate: self.me as u32, last_idx: li, last_term: lt }, s.term)
         };
