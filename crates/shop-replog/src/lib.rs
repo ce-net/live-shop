@@ -501,14 +501,26 @@ impl<M: Machine> Log<M> {
         // election timer
         let l = self.clone();
         tokio::spawn(async move {
+            // Sleep until the election deadline (or one beat while leading) instead of polling 4 times a beat:
+            // a heartbeat moves the deadline, so a follower wakes about once per election timeout when idle (CES-1).
             loop {
-                tokio::time::sleep(Duration::from_millis((beat_ms() / 4).max(10))).await;
-                let due = {
+                let wait = {
                     let s = l.st.lock().unwrap();
-                    s.role != Role::Leader && Instant::now() >= s.deadline
+                    let now = Instant::now();
+                    if s.role == Role::Leader {
+                        Some(Duration::from_millis(beat_ms()))
+                    } else if now >= s.deadline {
+                        None
+                    } else {
+                        Some(s.deadline - now)
+                    }
                 };
-                if due {
-                    l.elect().await;
+                match wait {
+                    Some(d) => tokio::time::sleep(d.max(Duration::from_millis(10))).await,
+                    None => {
+                        l.elect().await;
+                        tokio::time::sleep(Duration::from_millis(10)).await;
+                    }
                 }
             }
         });

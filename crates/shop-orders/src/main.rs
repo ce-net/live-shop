@@ -467,7 +467,8 @@ async fn main() {
         tokio::spawn(async move {
             let mut done_term = 0;
             loop {
-                tokio::time::sleep(Duration::from_millis(100)).await;
+                // a new leader is elected 4-8 beats after the old one dies, so one check per 500 ms is enough
+                tokio::time::sleep(Duration::from_millis(500)).await;
                 let s = ctx.log.status();
                 if s.role == Role::Leader && s.term != done_term && s.commit >= s.last.min(s.commit.max(1)) {
                     let applied = ctx.log.read(|_, a| a);
